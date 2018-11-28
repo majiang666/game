@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+	<title>特效</title>
+	<style>
+		*{
+			margin:0;
+			padding:0;
+		}
+		.game-box{
+			width:80px;
+			position:fixed;
+			top:0;
+			right:20px;
+			bottom:0;
+		}
+		.game-btn{
+			width:80px;
+			height:80px;
+			border-radius: 50%;
+			position: fixed;
+			bottom:20px;
+			right:20px;
+			background: -webkit-linear-gradient(red, blue); /* Safari 5.1 - 6.0 */
+			background: -o-linear-gradient(red, blue); /* Opera 11.1 - 12.0 */
+			background: -moz-linear-gradient(red, blue); /* Firefox 3.6 - 15 */
+			background: linear-gradient(red, blue); /* 标准的语法 */
+			border:0;
+			color: #fff;
+			outline: none;
+			font-size:14px;
+			box-shadow: 0 0 15px rgba(66, 46, 46, 0.8);
+		}
+		@keyframes btnSf{
+			from{
+				-webkit-transform: scale(0.9);
+        		transform: scale(0.9);
+			}
+			to{
+				-webkit-transform: scale(1);
+        		transform: scale(1);
+			}
+		}
+		.btn-sf{
+			-webkit-animation-name: btnSf;
+    		animation-name: btnSf;
+			-webkit-animation-duration: 0.5s;
+			animation-duration: 0.5s;
+			-webkit-animation-fill-mode: both;
+			animation-fill-mode: both
+		}
+		.heart{
+			width:36px;
+			height:36px;
+			position: absolute;
+		}
+		.heart-sf{
+			-webkit-animation-name: heartSf;
+    		animation-name: heartSf;
+			-webkit-animation-duration: 3.5s;
+			animation-duration: 3.5s;
+			-webkit-animation-fill-mode: both;
+			animation-fill-mode: both
+		}
+		@keyframes heartSf{
+			0%{
+				bottom:5%;
+				transform: scale(0);
+				opacity: 1;
+			}
+			90%{
+				bottom:100%;
+				transform: scale(1);
+				opacity: 1;
+			}
+			100%{
+				bottom:100%;
+				transform: scale(1.2);
+				opacity: 0;
+			}
+		}
+	</style>
+</head>
+<body>
+	<div class="game-box">
+		<button class="game-btn">暴击</button>
+	</div>
+</body>
+</html>
+<script type="text/javascript">
+	let btn = document.querySelector(".game-btn");
+	btn.addEventListener('click',function(){
+		this.className += " btn-sf";
+		setTimeout(() => {
+			this.classList.remove("btn-sf");
+		}, 500);
+		var img = document.createElement('img');
+		var rights = (Math.random() * 50).toFixed(0);
+		img.setAttribute('class',"heart heart-sf");
+		img.setAttribute('src',"h.svg");
+		img.setAttribute('style','right:'+rights+'px');
+		document.querySelector(".game-box").appendChild(img);
+		setTimeout(() => {
+			document.querySelector(".heart").remove();
+		}, 3500);
+	});
+	
+</script>
